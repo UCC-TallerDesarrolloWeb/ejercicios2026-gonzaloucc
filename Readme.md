@@ -16,10 +16,10 @@
 
 ### HTML
 -  [x] Primer HTML
--  [ ] Secciones
--  [ ] Títulos
--  [ ] Listas
--  [ ] Link
+-  [x] Secciones
+-  [x] Títulos
+-  [x] Listas
+-  [x] Link
 -  [ ] Tablas I
 -  [ ] Tablas II
 -  [ ] Tablas III
