@@ -121,3 +121,21 @@
 - Crear un archivo .gitignore
 - Incluir el nombre de la carpeta que se desea ignorar
 - Subir los cambios al repositorio remoto
+
+
+---
+
+# Ejercicio: README.md 🚀
+
+## Autor
+* Gonzalo **Marrin**
+
+## Contenido/Descripción
+Repositorio para resolver los trabajos prácticos y guías de la materia.
+
+[Acceso al Aula Virtual](https://fjs.ucc.edu.ar/)
+
+## Contacto
+| Nombre | Email |
+| :--- | :--- |
+| Gonzalo Marin | 2523776@ucc.edu.ar |
