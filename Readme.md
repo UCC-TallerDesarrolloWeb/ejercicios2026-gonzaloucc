@@ -20,11 +20,11 @@
 -  [x] Títulos
 -  [x] Listas
 -  [x] Link
--  [ ] Tablas I
--  [ ] Tablas II
--  [ ] Tablas III
--  [ ] Tablas VI
--  [ ] Comentarios
+-  [x] Tablas I
+-  [x] Tablas II
+-  [x] Tablas III
+-  [x] Tablas VI
+-  [x] Comentarios
 -  [ ] Formulario
 -  [ ] Accesibilidad
 -  [ ] Multimedia
