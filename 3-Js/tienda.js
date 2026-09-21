@@ -67,7 +67,9 @@ const productos = [
  * @method mostarModal
  * 
  */
-mostarModal = () => {
+mostarModal = (num) => {
+  document.getElementById("nombre-producto").innertext = productos[num].nombre;
+  document.getElementById("descripcion-producto").innertext = productos[num].description;
   document.getElementById("modal").style.display = 'block';
 }
 
@@ -87,11 +89,11 @@ mostrarCatalogo = () => {
 
   let contenido = "";
 
-  productos.forEach((producto) => {
+  productos.forEach((producto, id) => {
     contenido += `<div>
                   <img src=" https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/${producto.imagen}" alt="${producto.nombre}"
                   <h3>${producto.nombre}</h3>
-                  <button type="button" onclick="mostarModal()">ver detalles de producto</button>
+                  <button type="button" onclick="mostarModal(${id})">ver detalles de producto</button>
                 </div>`;
   });
 
