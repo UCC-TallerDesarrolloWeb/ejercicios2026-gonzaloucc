@@ -15,6 +15,7 @@ convertirUnidades = (id, valor) => {
         valor = valor.replace(",", ".");
     }
 
+
     // Validación si el valor no es un número
     if (isNaN(valor)) {
         alert("Se ingresó un valor incorrecto en: " + id);
@@ -49,10 +50,10 @@ convertirUnidades = (id, valor) => {
         pie = (valor * 3).toFixed(2);
     }
     
-    document.getElementById("metro").value = metros;
-    document.getElementById("pulgada").value = pulgadas;
-    document.getElementById("pie").value = pie;
-    document.getElementById("yarda").value = yardas;
+    document.getElementById("metro").value = Math.round(metros*100)/100;
+    document.getElementById("pulgada").value = Math.round(pulgadas*100)/100;
+    document.getElementById("pie").value = Math.round(pie*100)/100;
+    document.getElementById("yarda").value = yardas.toFixed(3);
 }
 
 /**

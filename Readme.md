@@ -53,9 +53,9 @@
 -  [x] Grados a Radianes
 -  [x] Refactorización
 -  [x] Mostrar/Ocultar div
--  [ ] Mostrar/Ocultar Dialog
--  [ ] Operaciones Matemáticas
--  [ ] Conversor de Unidades II
+-  [x] Mostrar/Ocultar Dialog
+-  [x] Operaciones Matemáticas
+-  [x] Conversor de Unidades II
 -  [ ] Operaciones Matemáticas II
 -  [ ] Renderizado Dinámico
 -  [ ] Renderizado Dinámico del Dialog
