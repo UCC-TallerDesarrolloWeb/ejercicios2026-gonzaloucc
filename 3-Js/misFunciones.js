@@ -4,7 +4,12 @@
  * @param {string} id - El id del input que cambió
  * @param {number|string} valor - El valor ingresado en el input
  */
-function convertirUnidades(id, valor) {
+
+
+convertirUnidades = (id, valor) => {
+
+    let metros, pulgadas, pie, yardas;
+
     // Reemplaza comas por puntos en caso de ingresar decimales con coma
     if (valor.includes(",")) {
         valor = valor.replace(",", ".");
@@ -13,31 +18,41 @@ function convertirUnidades(id, valor) {
     // Validación si el valor no es un número
     if (isNaN(valor)) {
         alert("Se ingresó un valor incorrecto en: " + id);
-        document.getElementById("metro").value = "";
-        document.getElementById("pulgada").value = "";
-        document.getElementById("pie").value = "";
-        document.getElementById("yarda").value = "";
+        metros = "";
+        pulgadas = "";
+        pies = "";
+        yardas = "";
+        
     } 
     else if (id === "metro") {
-        document.getElementById("pulgada").value = (valor * 39.3701).toFixed(2);
-        document.getElementById("pie").value = (valor * 3.28084).toFixed(2);
-        document.getElementById("yarda").value = (valor * 1.09361).toFixed(2);
+        metro = valor;
+        metros = (valor * 39.3701).toFixed(2);
+        pie = (valor * 3.28084).toFixed(2);
+        yardas = (valor * 1.09361).toFixed(2);
     } 
     else if (id === "pulgada") {
-        document.getElementById("metro").value = (valor * 0.0254).toFixed(2);
-        document.getElementById("pie").value = (valor * 0.0833333).toFixed(2);
-        document.getElementById("yarda").value = (valor * 0.0277778).toFixed(2);
+        pulgadas = valor;
+        metro = (valor * 0.0254).toFixed(2);
+        pie = (valor * 0.0833333).toFixed(2);
+        yarda = (valor * 0.0277778).toFixed(2);
     } 
     else if (id === "pie") {
-        document.getElementById("metro").value = (valor * 0.3048).toFixed(2);
-        document.getElementById("pulgada").value = (valor * 12).toFixed(2);
-        document.getElementById("yarda").value = (valor * 0.333333).toFixed(2);
+        pie = valor;
+        metro = (valor * 0.3048).toFixed(2);
+        pulgada = (valor * 12).toFixed(2);
+        yarda = (valor * 0.333333).toFixed(2);
     } 
     else if (id === "yarda") {
-        document.getElementById("metro").value = (valor * 0.9144).toFixed(2);
-        document.getElementById("pulgada").value = (valor * 36).toFixed(2);
-        document.getElementById("pie").value = (valor * 3).toFixed(2);
+        yarda = valor;
+        metro = (valor * 0.9144).toFixed(2);
+        pulgada = (valor * 36).toFixed(2);
+        pie = (valor * 3).toFixed(2);
     }
+    
+    document.getElementById("metro").value = metros;
+    document.getElementById("pulgada").value = pulgadas;
+    document.getElementById("pie").value = pie;
+    document.getElementById("yarda").value = yardas;
 }
 
 /**
