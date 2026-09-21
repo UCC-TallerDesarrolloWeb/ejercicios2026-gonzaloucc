@@ -75,3 +75,20 @@ function convertirGR(id){
     document.getElementById("grados").value = grad;
     document.getElementById("radianes").value = rad;
 }
+
+
+/**
+ * mostrar u ocultar div segun seleccion del ususario
+ * @method mostrarOcultar
+ * @param {string} valor - valor del id del radio button seleccionado
+ */
+mostrarOcultar = (valor) => {
+    const displayDiv = valor==="val_mostrar" ? 'block' : 'none';
+    document.getElementById("unDiv").style.display = displayDiv;
+
+    //if(valor === "val_mostrar"){
+    //    document.getElementById("unDiv").style.display = 'block';
+    //}else {
+    //    document.getElementById("unDiv").style.display = 'none';
+    //}
+}
