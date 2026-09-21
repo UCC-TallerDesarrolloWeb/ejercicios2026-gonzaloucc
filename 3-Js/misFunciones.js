@@ -102,5 +102,5 @@ function calcularSuma(){
     let sum1, sum2;
     sum1 = Number(document.getElementById("nums1").value);
     sum1 = Number(document.getElementById("nums2").value);
-    document.getElementById("totals").value = sum1 + sum2;
+    document.getElementById("totals").innerText.value = sum1 + sum2;
 }
