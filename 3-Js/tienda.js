@@ -175,11 +175,13 @@ function initFiltros() {
   const maximo = document.getElementById("precio-max");
   const marca = document.getElementById("marca-filtro");
   const categorias = document.querySelectorAll('input[name="categoria"]');
+  const order = document.getElementById("order");
 
   if (busqueda) busqueda.addEventListener("input", aplicarFiltros);
   if (minimo) minimo.addEventListener("input", aplicarFiltros);
   if (maximo) maximo.addEventListener("input", aplicarFiltros);
   if (marca) marca.addEventListener("change", aplicarFiltros);
+  if (order) order.addEventListener("change", ordenarCatalogo);
   categorias.forEach((checkbox) => checkbox.addEventListener("change", aplicarFiltros));
 }
 
@@ -218,12 +220,16 @@ function mostrarCarrito() {
     carritoList = [];
   }
 
+  let total = 0;
+
   const contenido = carritoList.length
     ? `
         <button type="button" onclick="vaciarCarrito()">Vaciar el Carrito</button>
         ${carritoList
           .map((num, index) => {
             const producto = productos[num];
+            if (producto) total += producto.precio;
+
             return `
               <div>
                 <h3>${producto ? producto.nombre : "Producto no disponible"}</h3>
@@ -233,6 +239,7 @@ function mostrarCarrito() {
             `;
           })
           .join("")}
+        <p>Total: ${formatearPrecio(total)}</p>
       `
     : `
         <p>No hay productos en el carrito.</p>
