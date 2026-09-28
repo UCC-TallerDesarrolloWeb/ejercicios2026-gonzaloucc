@@ -117,6 +117,21 @@ function agragrAlCarrito(num) {
   localStorage.setItem("carrito", JSON.stringify(carritoGuardado));
 }
 
+function vaciarCarrito() {
+  localStorage.removeItem("carrito");
+  mostrarCarrito();
+}
+
+function eliminarDelCarrito(index) {
+  const carritoList = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+  if (!Array.isArray(carritoList)) return;
+
+  carritoList.splice(index, 1);
+  localStorage.setItem("carrito", JSON.stringify(carritoList));
+  mostrarCarrito();
+}
+
 function mostrarCarrito() {
   const carrito = document.getElementById("carrito");
 
@@ -129,18 +144,25 @@ function mostrarCarrito() {
   }
 
   const contenido = carritoList.length
-    ? carritoList
-        .map((num) => {
-          const producto = productos[num];
-          return `
-            <div>
-              <h3>${producto ? producto.nombre : "Producto no disponible"}</h3>
-              <p>${producto ? producto.precio : 0}</p>
-            </div>
-          `;
-        })
-        .join("")
-    : "<p>No hay productos en el carrito.</p>";
+    ? `
+        <button type="button" onclick="vaciarCarrito()">Vaciar el Carrito</button>
+        ${carritoList
+          .map((num, index) => {
+            const producto = productos[num];
+            return `
+              <div>
+                <h3>${producto ? producto.nombre : "Producto no disponible"}</h3>
+                <p>${producto ? producto.precio : 0}</p>
+                <button type="button" onclick="eliminarDelCarrito(${index})">Eliminar el producto</button>
+              </div>
+            `;
+          })
+          .join("")}
+      `
+    : `
+        <p>No hay productos en el carrito.</p>
+        <button type="button" onclick="vaciarCarrito()">Vaciar el Carrito</button>
+      `;
 
   carrito.innerHTML = contenido;
 }
