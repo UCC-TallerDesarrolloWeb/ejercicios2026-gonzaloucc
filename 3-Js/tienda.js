@@ -90,12 +90,17 @@ function cerrarModal() {
   }
 }
 
-function mostrarCatalogo() {
+function renderCatalogo(productosFiltrados) {
   const catalogo = document.getElementById("catalogo");
 
   if (!catalogo) return;
 
-  const contenido = productos
+  if (!productosFiltrados.length) {
+    catalogo.innerHTML = "<p>No se encontraron productos con esos filtros.</p>";
+    return;
+  }
+
+  const contenido = productosFiltrados
     .map(
       (producto, id) => `
         <div>
@@ -109,6 +114,56 @@ function mostrarCatalogo() {
     .join("");
 
   catalogo.innerHTML = contenido;
+}
+
+function mostrarCatalogo() {
+  renderCatalogo(productos);
+}
+
+function obtenerCategoriasSeleccionadas() {
+  return Array.from(document.querySelectorAll('input[name="categoria"]:checked')).map(
+    (checkbox) => checkbox.value
+  );
+}
+
+function aplicarFiltros() {
+  const texto = document.getElementById("search")?.value.toLowerCase().trim() || "";
+  const precioMin = Number(document.getElementById("precio-min")?.value) || 0;
+  const precioMax = Number(document.getElementById("precio-max")?.value) || Number.MAX_SAFE_INTEGER;
+  const marca = document.getElementById("marca-filtro")?.value || "Todas";
+  const categorias = obtenerCategoriasSeleccionadas();
+
+  const resultado = productos.filter((producto) => {
+    const coincideTexto =
+      !texto ||
+      producto.nombre.toLowerCase().includes(texto) ||
+      producto.description.toLowerCase().includes(texto) ||
+      producto.marca.toLowerCase().includes(texto) ||
+      producto.categoria.toLowerCase().includes(texto);
+
+    const coincidePrecio = producto.precio >= precioMin && producto.precio <= precioMax;
+    const coincideMarca = marca === "Todas" || producto.marca === marca;
+    const coincideCategoria =
+      categorias.length === 0 || categorias.includes(producto.categoria);
+
+    return coincideTexto && coincidePrecio && coincideMarca && coincideCategoria;
+  });
+
+  renderCatalogo(resultado);
+}
+
+function initFiltros() {
+  const busqueda = document.getElementById("search");
+  const minimo = document.getElementById("precio-min");
+  const maximo = document.getElementById("precio-max");
+  const marca = document.getElementById("marca-filtro");
+  const categorias = document.querySelectorAll('input[name="categoria"]');
+
+  if (busqueda) busqueda.addEventListener("input", aplicarFiltros);
+  if (minimo) minimo.addEventListener("input", aplicarFiltros);
+  if (maximo) maximo.addEventListener("input", aplicarFiltros);
+  if (marca) marca.addEventListener("change", aplicarFiltros);
+  categorias.forEach((checkbox) => checkbox.addEventListener("change", aplicarFiltros));
 }
 
 function agragrAlCarrito(num) {
@@ -166,3 +221,5 @@ function mostrarCarrito() {
 
   carrito.innerHTML = contenido;
 }
+
+document.addEventListener("DOMContentLoaded", initFiltros);

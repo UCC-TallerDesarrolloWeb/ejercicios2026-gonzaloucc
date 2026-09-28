@@ -23,27 +23,35 @@
                 <fieldset>
                     <legend>Precios</legend>
                     <p>
-                        <label for="price-min">Minimo </label>
-                        <input type="numbre" name="price-min" id="price-min" min="0">
+                        <label for="precio-min">Mínimo </label>
+                        <input type="number" name="precio-min" id="precio-min" min="0" placeholder="0">
                     </p>
                     <p>
-                        <label for="price-max">Maximo </label>
-                        <input type="numbre" name="price-max" id="price-max" min="0">
+                        <label for="precio-max">Máximo </label>
+                        <input type="number" name="precio-max" id="precio-max" min="0" placeholder="1000000">
                     </p>
+                </fieldset>
+                <fieldset>
+                    <legend>Marca</legend>
+                    <select id="marca-filtro">
+                        <option value="Todas">Todas</option>
+                        <option value="Gran Marc">Gran Marc</option>
+                        <option value="Daedo">Daedo</option>
+                    </select>
                 </fieldset>
                 <fieldset>
                     <legend>Tipo de Productos</legend>
                     <p>
-                        <label for="protectores">protectores </label>
-                        <input type="checkbox" name="tipo" id="protectores" values="protectores">
+                        <label for="protectores">Protectores </label>
+                        <input type="checkbox" name="categoria" id="protectores" value="Protectores">
                     </p>
                     <p>
-                        <label for="entrenamiento">entrenamiento </label>
-                        <input type="checkbox" name="tipo" id="entrenamiento" values="entrenamiento">
+                        <label for="entrenamiento">Entrenamiento </label>
+                        <input type="checkbox" name="categoria" id="entrenamiento" value="Entrenamiento">
                     </p>
                     <p>
-                        <label for="Doboks">doboks </label>
-                        <input type="checkbox" name="tipo" id="doboks" values="doboks">
+                        <label for="doboks">Doboks </label>
+                        <input type="checkbox" name="categoria" id="doboks" value="Dobok">
                     </p>
                 </fieldset>
             </form>
