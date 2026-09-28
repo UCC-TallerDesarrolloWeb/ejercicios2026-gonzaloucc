@@ -252,3 +252,29 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarCarrito();
   }
 });
+
+let ordenarCatalogo = () => {
+  const opt = document.getElementById("order").value;
+  let newProductos;
+
+  switch(opt){
+    case "menor":
+      newProductos = productos.sort((a,b) => a.precio - b.precio);
+      break;
+    
+    case "mayor":
+      newProductos = productos.sort((a,b) => b.precio - a.precio);
+      break;
+    
+    case "a-z":
+      newProductos = productos.sort((a,b) => {
+        if(a.nombre.toLowerCase() < b.nombre.toLowerCase()){
+          return -1;
+        } else {return 1}
+      })
+      break;
+    default:
+      newProductos = productos;
+  }
+  mostrarCatalogo(newProductos);
+}
