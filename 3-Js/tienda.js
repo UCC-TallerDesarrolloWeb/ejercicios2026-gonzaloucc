@@ -90,6 +90,22 @@ function cerrarModal() {
   }
 }
 
+function formatearPrecio(precio) {
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  }).format(precio);
+}
+
+function actualizarContadorCarrito() {
+  const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+  const contador = document.getElementById("contador-carrito");
+
+  if (contador) {
+    contador.textContent = carrito.length;
+  }
+}
+
 function renderCatalogo(productosFiltrados) {
   const catalogo = document.getElementById("catalogo");
 
@@ -106,6 +122,7 @@ function renderCatalogo(productosFiltrados) {
         <div>
           <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/${producto.imagen}" alt="${producto.nombre}">
           <h3>${producto.nombre}</h3>
+          <p>${formatearPrecio(producto.precio)}</p>
           <button type="button" onclick="mostrarModal(${id})">Ver detalles del producto</button>
           <button type="button" onclick="agragrAlCarrito(${id})">Agregar al Carrito</button>
         </div>
@@ -170,10 +187,12 @@ function agragrAlCarrito(num) {
   const carritoGuardado = JSON.parse(localStorage.getItem("carrito") || "[]");
   carritoGuardado.push(num);
   localStorage.setItem("carrito", JSON.stringify(carritoGuardado));
+  actualizarContadorCarrito();
 }
 
 function vaciarCarrito() {
   localStorage.removeItem("carrito");
+  actualizarContadorCarrito();
   mostrarCarrito();
 }
 
@@ -184,6 +203,7 @@ function eliminarDelCarrito(index) {
 
   carritoList.splice(index, 1);
   localStorage.setItem("carrito", JSON.stringify(carritoList));
+  actualizarContadorCarrito();
   mostrarCarrito();
 }
 
@@ -207,7 +227,7 @@ function mostrarCarrito() {
             return `
               <div>
                 <h3>${producto ? producto.nombre : "Producto no disponible"}</h3>
-                <p>${producto ? producto.precio : 0}</p>
+                <p>${producto ? formatearPrecio(producto.precio) : formatearPrecio(0)}</p>
                 <button type="button" onclick="eliminarDelCarrito(${index})">Eliminar el producto</button>
               </div>
             `;
@@ -222,4 +242,13 @@ function mostrarCarrito() {
   carrito.innerHTML = contenido;
 }
 
-document.addEventListener("DOMContentLoaded", initFiltros);
+document.addEventListener("DOMContentLoaded", () => {
+  initFiltros();
+  actualizarContadorCarrito();
+  if (document.getElementById("catalogo")) {
+    mostrarCatalogo();
+  }
+  if (document.getElementById("carrito")) {
+    mostrarCarrito();
+  }
+});
