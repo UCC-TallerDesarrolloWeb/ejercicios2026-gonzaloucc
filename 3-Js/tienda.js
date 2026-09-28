@@ -62,40 +62,85 @@ const productos = [
   },
 ];
 
-/**
- * MOstar un modal con el detalle del producto
- * @method mostarModal
- * 
- */
-mostarModal = (num) => {
-  document.getElementById("nombre-producto").innertext = productos[num].nombre;
-  document.getElementById("descripcion-producto").innertext = productos[num].description;
-  document.getElementById("modal").style.display = 'block';
+function mostrarModal(num) {
+  const producto = productos[num];
+  const modal = document.getElementById("modal");
+
+  if (!producto || !modal) return;
+
+  document.getElementById("nombre-producto").textContent = producto.nombre;
+  document.getElementById("descripcion-producto").textContent = producto.description;
+
+  if (typeof modal.showModal === "function") {
+    modal.showModal();
+  } else {
+    modal.style.display = "block";
+  }
 }
 
+function cerrarModal() {
+  const modal = document.getElementById("modal");
 
-/**
- * MOstar un modal con el detalle del producto
- * @method cerrarModal
- * 
- */
-cerrarModal = () => {
-  document.getElementById("modal").style.display = 'none';
+  if (!modal) return;
+
+  if (typeof modal.close === "function") {
+    modal.close();
+  } else {
+    modal.style.display = "none";
+  }
 }
 
+function mostrarCatalogo() {
+  const catalogo = document.getElementById("catalogo");
 
+  if (!catalogo) return;
 
-mostrarCatalogo = () => {
+  const contenido = productos
+    .map(
+      (producto, id) => `
+        <div>
+          <img src="https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/${producto.imagen}" alt="${producto.nombre}">
+          <h3>${producto.nombre}</h3>
+          <button type="button" onclick="mostrarModal(${id})">Ver detalles del producto</button>
+          <button type="button" onclick="agragrAlCarrito(${id})">Agregar al Carrito</button>
+        </div>
+      `
+    )
+    .join("");
 
-  let contenido = "";
+  catalogo.innerHTML = contenido;
+}
 
-  productos.forEach((producto, id) => {
-    contenido += `<div>
-                  <img src=" https://ucc-tallerdesarrolloweb.github.io/filminas/images/ejercicios/${producto.imagen}" alt="${producto.nombre}"
-                  <h3>${producto.nombre}</h3>
-                  <button type="button" onclick="mostarModal(${id})">ver detalles de producto</button>
-                </div>`;
-  });
+function agragrAlCarrito(num) {
+  const carritoGuardado = JSON.parse(localStorage.getItem("carrito") || "[]");
+  carritoGuardado.push(num);
+  localStorage.setItem("carrito", JSON.stringify(carritoGuardado));
+}
 
-  document.getElementById("catalogo").innerHTML = contenido;
+function mostrarCarrito() {
+  const carrito = document.getElementById("carrito");
+
+  if (!carrito) return;
+
+  let carritoList = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+  if (!Array.isArray(carritoList)) {
+    carritoList = [];
+  }
+
+  const contenido = carritoList.length
+    ? carritoList
+        .map((num) => {
+          const producto = productos[num];
+          return `
+            <div>
+              <h3>${producto ? producto.nombre : "Producto no disponible"}</h3>
+              <p>${producto ? producto.precio : 0}</p>
+            </div>
+          `;
+        })
+        .join("")
+    : "<p>No hay productos en el carrito.</p>";
+
+  carrito.innerHTML = contenido;
 }
