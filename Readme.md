@@ -80,8 +80,8 @@
 -  [ ] Youtube
 
 ### SASS
--  [ ] Sass básico
--  [ ] Diseño de Interiores
+-  [x] Sass básico
+-  [x] Diseño de Interiores
 
 ## Unidad 6: Frameworks de JavaScript: React, Vue y Angular
 -  [x] Instalación de React Usando Vite
@@ -94,11 +94,11 @@
 
 
 ## Unidad 7: Backend y APIs
--  [ ] Mock del Backend
--  [ ] Análisis de Pokeapi
--  [ ] APIs en React
--  [ ] APIs en React
--  [ ] Carrito
+-  [x] Mock del Backend
+-  [x] Análisis de Pokeapi
+-  [x] APIs en React
+-  [x] APIs en React
+-  [x] Carrito
 
 ## Unidad 8: Buenas prácticas en los desarrollos web
 
